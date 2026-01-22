@@ -160,19 +160,22 @@ def compress_pdf(input_bytes: bytes, quality: str) -> Tuple[bytes, dict]:
     reader = PdfReader(io.BytesIO(input_bytes))
     writer = PdfWriter()
 
+    # 複製所有頁面
     for page in reader.pages:
         writer.add_page(page)
 
-    if reader.metadata:
-        writer.add_metadata(reader.metadata)
-
-    # 壓縮內容串流
+    # 壓縮每個頁面的內容串流
     for page in writer.pages:
-        page.compress_content_streams()
+        try:
+            page.compress_content_streams()
+        except:
+            pass
 
+    # 寫入輸出
     output = io.BytesIO()
     writer.write(output)
-    output_bytes = output.getvalue()
+    output.seek(0)
+    output_bytes = output.read()
     compressed_size = len(output_bytes)
 
     reduction = ((original_size - compressed_size) / original_size) * 100 if original_size > 0 else 0
