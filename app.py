@@ -491,7 +491,7 @@ def main_app():
     st.markdown(
         """
         <div style="text-align: center; color: #888; font-size: 0.9rem;">
-            <p>雲卷雲舒 · PDF 全能匠心 - 免費開源工具</p>
+            <p>亮言~ 雲卷雲舒 · PDF 全能匠心 - 免費開源工具</p>
             <p>所有檔案處理皆在伺服器端完成，處理完成後即刻刪除，不會保存您的檔案。</p>
         </div>
         """,
