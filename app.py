@@ -616,96 +616,95 @@ def main_app():
 
 
 # 主程式入口
-if __name__ == "__main__":
-    # 檢查是否已經顯示過啟動畫面
-    if "splash_done" not in st.session_state:
-        st.session_state.splash_done = False
+# 檢查是否已經顯示過啟動畫面
+if "splash_done" not in st.session_state:
+    st.session_state.splash_done = False
 
-    if not st.session_state.splash_done:
-        # 讀取圖片並轉為 base64
-        splash_image_path = Path("assets/splash.png")
-        if splash_image_path.exists():
-            img_base64 = get_image_base64(str(splash_image_path))
-        else:
-            img_base64 = ""
-
-        # 全螢幕啟動畫面
-        st.markdown(f"""
-        <style>
-            #MainMenu {{visibility: hidden;}}
-            footer {{visibility: hidden;}}
-            header {{visibility: hidden;}}
-            .stApp {{
-                background: transparent;
-            }}
-            .block-container {{
-                padding: 0 !important;
-                max-width: 100% !important;
-            }}
-            .splash-fullscreen {{
-                position: fixed;
-                top: 0;
-                left: 0;
-                width: 100vw;
-                height: 100vh;
-                background-image: url('data:image/png;base64,{img_base64}');
-                background-size: cover;
-                background-position: center;
-                background-repeat: no-repeat;
-                display: flex;
-                flex-direction: column;
-                justify-content: flex-end;
-                align-items: center;
-                z-index: 9999;
-            }}
-            .progress-wrapper {{
-                width: 60%;
-                max-width: 500px;
-                margin-bottom: 80px;
-            }}
-            .progress-bg {{
-                background: rgba(255,255,255,0.5);
-                border-radius: 10px;
-                height: 12px;
-                overflow: hidden;
-            }}
-            .progress-fill {{
-                background: linear-gradient(90deg, #4CAF50, #8BC34A);
-                height: 100%;
-                width: 0%;
-                border-radius: 10px;
-                animation: loadingBar 3.5s ease-in-out forwards;
-            }}
-            .loading-text {{
-                color: #333;
-                font-size: 1rem;
-                margin-top: 15px;
-                text-align: center;
-                font-family: "Microsoft JhengHei", sans-serif;
-            }}
-            @keyframes loadingBar {{
-                0% {{ width: 0%; }}
-                100% {{ width: 100%; }}
-            }}
-        </style>
-        <div class="splash-fullscreen">
-            <div class="progress-wrapper">
-                <div class="progress-bg">
-                    <div class="progress-fill"></div>
-                </div>
-                <p class="loading-text">載入中...</p>
-            </div>
-        </div>
-        """, unsafe_allow_html=True)
-
-        # 等待 4 秒
-        time.sleep(4)
-
-        # 標記啟動畫面已完成
-        st.session_state.splash_done = True
-
-        # 重新載入頁面
-        st.rerun()
+if not st.session_state.splash_done:
+    # 讀取圖片並轉為 base64
+    splash_image_path = Path("assets/splash.png")
+    if splash_image_path.exists():
+        img_base64 = get_image_base64(str(splash_image_path))
     else:
-        # 顯示主應用程式
-        main_app()
+        img_base64 = ""
+
+    # 全螢幕啟動畫面
+    st.markdown(f"""
+    <style>
+        #MainMenu {{visibility: hidden;}}
+        footer {{visibility: hidden;}}
+        header {{visibility: hidden;}}
+        .stApp {{
+            background: transparent;
+        }}
+        .block-container {{
+            padding: 0 !important;
+            max-width: 100% !important;
+        }}
+        .splash-fullscreen {{
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background-image: url('data:image/png;base64,{img_base64}');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            align-items: center;
+            z-index: 9999;
+        }}
+        .progress-wrapper {{
+            width: 60%;
+            max-width: 500px;
+            margin-bottom: 80px;
+        }}
+        .progress-bg {{
+            background: rgba(255,255,255,0.5);
+            border-radius: 10px;
+            height: 12px;
+            overflow: hidden;
+        }}
+        .progress-fill {{
+            background: linear-gradient(90deg, #4CAF50, #8BC34A);
+            height: 100%;
+            width: 0%;
+            border-radius: 10px;
+            animation: loadingBar 3.5s ease-in-out forwards;
+        }}
+        .loading-text {{
+            color: #333;
+            font-size: 1rem;
+            margin-top: 15px;
+            text-align: center;
+            font-family: "Microsoft JhengHei", sans-serif;
+        }}
+        @keyframes loadingBar {{
+            0% {{ width: 0%; }}
+            100% {{ width: 100%; }}
+        }}
+    </style>
+    <div class="splash-fullscreen">
+        <div class="progress-wrapper">
+            <div class="progress-bg">
+                <div class="progress-fill"></div>
+            </div>
+            <p class="loading-text">載入中...</p>
+        </div>
+    </div>
+    """, unsafe_allow_html=True)
+
+    # 等待 4 秒
+    time.sleep(4)
+
+    # 標記啟動畫面已完成
+    st.session_state.splash_done = True
+
+    # 重新載入頁面
+    st.rerun()
+else:
+    # 顯示主應用程式
+    main_app()
