@@ -526,10 +526,10 @@ def main_app():
             "選擇壓縮程度：",
             options=["low", "medium", "high", "extreme"],
             format_func=lambda x: {
-                "low": "🟢 低度壓縮（300 DPI，高品質列印）",
-                "medium": "🟡 中度壓縮（150 DPI，螢幕閱讀）",
-                "high": "🔴 高度壓縮（72 DPI，最小檔案）",
-                "extreme": "⚫ 極限壓縮（50 DPI，極低品質）"
+                "low": "🟢 低度壓縮",
+                "medium": "🟡 中度壓縮",
+                "high": "🔴 高度壓縮",
+                "extreme": "⚫ 極限壓縮"
             }[x],
             index=2,
             key="compress_quality"
@@ -549,8 +549,6 @@ def main_app():
             )
             st.info(f"💡 將自動嘗試不同參數，找到最接近 {target_size_mb} MB 的壓縮結果（處理時間較長）")
 
-        if quality == "extreme":
-            st.warning("⚠️ 極限壓縮會大幅降低圖片品質，文字可能模糊。僅建議用於需要極小檔案的情況。")
 
         if uploaded_file is not None:
             st.markdown(f"**已上傳：** {uploaded_file.name} ({format_size(uploaded_file.size)})")
