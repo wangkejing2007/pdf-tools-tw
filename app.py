@@ -269,6 +269,15 @@ def main_app():
     # 自訂 CSS 樣式
     st.markdown("""
     <style>
+        .brand-text {
+            position: fixed;
+            top: 60px;
+            left: 20px;
+            font-size: 0.9rem;
+            color: #8B7355;
+            font-family: "Microsoft JhengHei", "PingFang TC", serif;
+            z-index: 1000;
+        }
         .main-title {
             text-align: center;
             color: #5D4E37;
@@ -291,6 +300,9 @@ def main_app():
         }
     </style>
     """, unsafe_allow_html=True)
+
+    # 左上方品牌文字
+    st.markdown('<div class="brand-text">亮言~</div>', unsafe_allow_html=True)
 
     # 主標題
     st.markdown('<h1 class="main-title">雲卷雲舒 · PDF 全能匠心</h1>', unsafe_allow_html=True)
